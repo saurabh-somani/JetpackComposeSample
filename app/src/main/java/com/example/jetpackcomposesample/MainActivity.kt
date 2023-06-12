@@ -59,8 +59,16 @@ fun MessageCard(msg: Message) {
                 text = msg.author,
                 color = MaterialTheme.colorScheme.secondary
             )
+
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = msg.body)
+
+            Surface(shape = MaterialTheme.shapes.medium, shadowElevation = 1.dp) {
+                Text(
+                    text = msg.body,
+                    modifier = Modifier.padding(all = 4.dp),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
     }
 }
