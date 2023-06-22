@@ -3,6 +3,8 @@ package com.example.jetpackcomposesample.ui.screens
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,8 +19,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Greetings() {
-    Column {
-        listOf("World", "Compose").forEach {
+    LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
+        val listOfWorlds = List(1000) { "World" }
+        items(listOfWorlds) {
             Greeting(name = it)
         }
     }
