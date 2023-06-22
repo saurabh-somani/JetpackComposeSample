@@ -1,6 +1,7 @@
 package com.example.jetpackcomposesample.data
 
-import com.example.jetpackcomposesample.Message
+import com.example.jetpackcomposesample.ui.screens.Message
+
 
 object SampleData {
 
