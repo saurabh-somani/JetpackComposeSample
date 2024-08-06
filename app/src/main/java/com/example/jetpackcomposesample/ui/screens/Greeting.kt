@@ -1,6 +1,7 @@
 package com.example.jetpackcomposesample.ui.screens
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -24,11 +25,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.LifecycleOwner
 import com.example.jetpackcomposesample.ui.theme.JetpackComposeSampleTheme
 
+private const val TAG = "Greeting"
 @Composable
 fun Greetings() {
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
@@ -36,6 +41,11 @@ fun Greetings() {
         items(listOfWorlds) {
             Greeting(name = it)
         }
+    }
+
+    val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
+    MyLifecycleObserver(lifecycleOwner) { event ->
+        Log.d(TAG, "OnboardingScreen: $event")
     }
 }
 
@@ -45,7 +55,9 @@ fun Greeting(name: String) {
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
         ),
-        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        modifier = Modifier
+            .padding(vertical = 4.dp, horizontal = 8.dp)
+            .layoutId("greeting:$name")
     ) {
         CardContent(name)
     }
